@@ -12,6 +12,7 @@ services:
       - "9200:9200"
     volumes:
       - ./elk/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - elastic_data:/usr/share/elasticsearch/data  # Volume persistente
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health"]
       interval: 30s
@@ -72,3 +73,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+
+volumes:
+  elastic_data:
